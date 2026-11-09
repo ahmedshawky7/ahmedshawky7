@@ -1,44 +1,58 @@
+
 name: Auto Generate ATS CVs
 
 on:
   push:
     paths:
-      - 'data.json' # يشتغل تلقائياً عند أي تعديل في ملف البيانات
+      - 'data.json'
+      - 'generate_cvs.py'
+      - '.github/workflows/generate-cvs.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-    - name: Install Dependencies
-      run: |
-        pip install google-genai
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-genai
 
-    - name: Run CV Content Generator
-      env:
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: python generate_cvs.py
+      - name: Run CV Content Generator
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python generate_cvs.py
 
-    - name: Install Markdown to PDF tool
-      run: sudo apt-get install -y pandoc weasyprint || npm install --global md-to-pdf
+      - name: Install Markdown to PDF tool
+        run: |
+          npm install --global md-to-pdf
 
-    - name: Convert MD to PDF
-      run: |
-        npx md-to-pdf cvs/flutter_cv.md
-        npx md-to-pdf cvs/backend_cv.md
-        npx md-to-pdf cvs/fullstack_cv.md
+      - name: Convert Markdown to PDF
+        run: |
+          md-to-pdf cvs/flutter_cv.md
+          md-to-pdf cvs/backend_cv.md
+          md-to-pdf cvs/fullstack_cv.md
 
-    - name: Commit and Push Generated PDFs
-      run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git add cvs/*.pdf
-        git commit -m "Automated PDF CV update [skip ci]" || echo "No changes to commit"
-        git push
+      - name: Commit and Push Generated PDFs
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          git add cvs/*.pdf
+
+          git commit -m "Automated CV update [skip ci]" || echo "No changes to commit"
+
+          git push
