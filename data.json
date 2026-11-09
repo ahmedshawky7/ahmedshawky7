@@ -34,7 +34,7 @@
       "category": "flutter",
       "description": "A scalable fitness and health tracking mobile application. Features include authentication, user profiles, dynamic workout plans, and a nutrition system. Implemented community features like posts, comments, and reactions.",
       "technologies": ["Flutter", "Dart", "Clean Architecture", "Cubit", "Dio", "Firebase", "Gemini API", "Google Maps", "GetIt", "FlutterSecureStorage"],
-      "live_url": "https://bit.ly",
+      "live_url": "https://bit.ly ",
       "github_url": "https://github.com"
     },
     {
