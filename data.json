@@ -74,7 +74,7 @@
       "category": "flutter",
       "description": "A real-time news aggregation mobile application consuming external REST APIs. Features an AI-powered integrated chatbot for interactive Q&A and image descriptions.",
       "technologies": ["Flutter", "Dart", "Cubit", "REST APIs", "Gemini API"],
-      "live_url": "https://bit.ly ",
+      "live_url": "",
       "github_url": "https://github.com"
     }
   ],
