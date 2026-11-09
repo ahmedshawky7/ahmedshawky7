@@ -6,15 +6,13 @@ import requests
 with open('data.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
-# 2. إعدادات الـ API الصحيحة لـ Gemini
+# 2. رابط الـ Endpoint الصحيح والمباشر لـ Gemini
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-API_URL = "https://googleapis.com"
+API_URL = f"https://googleapis.com{GEMINI_API_KEY}"
 
 def ask_ai(prompt):
-    # إرسال المفتاح عبر الـ Headers بدلاً من دمج الرابط
     headers = {
-        "Content-Type": "application/json",
-        "x-goog-api-key": GEMINI_API_KEY
+        "Content-Type": "application/json"
     }
     payload = {
         "contents": [{"parts": [{"text": prompt}]}]
@@ -24,7 +22,7 @@ def ask_ai(prompt):
     if response.status_code != 200:
         raise Exception(f"API Error: {response.text}")
         
-    return response.json()['candidates'][0]['content']['parts'][0]['text']
+    return response.json()['candidates']['content']['parts']['text']
 
 cv_types = ['flutter', 'backend', 'fullstack']
 
