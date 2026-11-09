@@ -3,7 +3,7 @@ name: Auto Generate ATS CVs
 on:
   push:
     paths:
-      - 'data.json' # يشتغل فقط لما تعدل ملف البيانات
+      - 'data.json' # يشتغل تلقائياً عند أي تعديل في ملف البيانات
 
 jobs:
   build:
@@ -18,7 +18,8 @@ jobs:
         python-version: '3.x'
 
     - name: Install Dependencies
-      run: pip install requests
+      run: |
+        pip install google-genai
 
     - name: Run CV Content Generator
       env:
@@ -30,7 +31,6 @@ jobs:
 
     - name: Convert MD to PDF
       run: |
-        # تحويل الملفات الناتجة إلى PDF احترافي
         npx md-to-pdf cvs/flutter_cv.md
         npx md-to-pdf cvs/backend_cv.md
         npx md-to-pdf cvs/fullstack_cv.md
