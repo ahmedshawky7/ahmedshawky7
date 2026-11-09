@@ -3,77 +3,625 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض أعمالي</title>
+    <title>Ahmed Shawky — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; background: #f4f7f6; color: #333; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        .profile { text-align: center; margin-bottom: 40px; }
-        .filters { text-align: center; margin-bottom: 20px; }
-        .btn { padding: 8px 16px; margin: 5px; cursor: pointer; border: none; background: #007bff; color: white; border-radius: 4px; }
-        .project-card { background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .tech-badge { background: #e9ecef; padding: 3px 8px; margin: 2px; display: inline-block; font-size: 12px; border-radius: 4px; }
-        .links a { margin-left: 15px; color: #007bff; text-decoration: none; font-weight: bold; }
+        :root{
+            --bg:#05060a;
+            --glass:rgba(255,255,255,0.045);
+            --glass-border:rgba(255,255,255,0.09);
+            --text:#e8eaf2;
+            --muted:#9aa1b5;
+            --violet:#7c3aed;
+            --cyan:#06b6d4;
+            --pink:#f472b6;
+            --gradient:linear-gradient(120deg,#7c3aed,#06b6d4 50%,#f472b6);
+            --radius:20px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:'Tajawal',sans-serif;
+            background:var(--bg);color:var(--text);
+            overflow-x:hidden;line-height:1.7;
+        }
+
+        /* ===== Background ===== */
+        #bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-3;pointer-events:none}
+        .blob{position:fixed;border-radius:50%;filter:blur(120px);opacity:.5;z-index:-2;pointer-events:none;animation:float 18s ease-in-out infinite}
+        .blob-1{width:500px;height:500px;background:#7c3aed;top:-120px;right:-100px}
+        .blob-2{width:460px;height:460px;background:#06b6d4;bottom:-140px;left:-120px;animation-delay:-6s}
+        .blob-3{width:380px;height:380px;background:#f472b6;top:40%;left:30%;opacity:.25;animation-delay:-12s}
+        @keyframes float{
+            0%,100%{transform:translate(0,0) scale(1)}
+            33%{transform:translate(40px,-50px) scale(1.1)}
+            66%{transform:translate(-30px,40px) scale(.95)}
+        }
+        .cursor-glow{
+            position:fixed;width:500px;height:500px;border-radius:50%;
+            background:radial-gradient(circle,rgba(124,58,237,.13),transparent 60%);
+            pointer-events:none;z-index:-1;transform:translate(-50%,-50%);
+        }
+        .noise{
+            position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.04;
+            background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+        }
+
+        .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        /* ===== Nav ===== */
+        nav{position:sticky;top:16px;z-index:100;margin:16px auto 0;max-width:900px;display:flex;justify-content:center;padding:0 16px}
+        .nav-inner{
+            display:flex;gap:6px;padding:8px;
+            background:rgba(10,12,22,.6);backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+            border:1px solid var(--glass-border);border-radius:999px;
+            box-shadow:0 8px 32px rgba(0,0,0,.4);
+        }
+        .nav-inner a{
+            color:var(--muted);text-decoration:none;padding:8px 18px;
+            border-radius:999px;font-size:14px;font-weight:500;transition:.3s;
+        }
+        .nav-inner a:hover{color:#fff;background:rgba(255,255,255,.07)}
+
+        /* ===== Hero ===== */
+        .hero{
+            min-height:88vh;display:flex;flex-direction:column;align-items:center;
+            justify-content:center;text-align:center;padding:80px 0 40px;position:relative;
+        }
+        .avatar{
+            width:150px;height:150px;border-radius:50%;display:grid;place-items:center;
+            font-family:'Space Grotesk',sans-serif;font-size:46px;font-weight:700;color:#fff;
+            background:var(--gradient);background-size:200% 200%;
+            animation:gradientShift 6s ease infinite;position:relative;
+            margin-bottom:32px;
+            box-shadow:0 0 0 1px rgba(255,255,255,.15),0 20px 60px rgba(124,58,237,.4);
+        }
+        .avatar::after{
+            content:'';position:absolute;inset:-12px;border-radius:50%;
+            border:1px dashed rgba(255,255,255,.25);
+            animation:spin 18s linear infinite;
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+        .hero h1{
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(40px,7vw,76px);font-weight:700;letter-spacing:-1.5px;
+            line-height:1.1;
+            background:linear-gradient(120deg,#fff 20%,#c4b5fd 45%,#67e8f9 70%,#fff);
+            background-size:200% auto;
+            -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+            animation:shine 8s linear infinite;
+        }
+        @keyframes shine{to{background-position:200% center}}
+
+        .hero .role{
+            font-size:clamp(15px,2vw,19px);color:var(--muted);
+            margin-top:16px;min-height:30px;font-weight:500;
+        }
+        .hero .role .cursor{
+            display:inline-block;width:2px;height:1.1em;background:var(--cyan);
+            vertical-align:text-bottom;margin-right:3px;animation:blink 1s step-end infinite;
+        }
+        @keyframes blink{50%{opacity:0}}
+
+        .hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:36px}
+        .btn{
+            display:inline-flex;align-items:center;gap:8px;padding:13px 28px;
+            border-radius:999px;font-family:'Tajawal',sans-serif;font-size:15px;
+            font-weight:700;text-decoration:none;cursor:pointer;border:none;
+            transition:transform .25s,box-shadow .25s;
+        }
+        .btn-primary{background:var(--gradient);background-size:200% auto;color:#fff;box-shadow:0 10px 40px rgba(124,58,237,.35)}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(124,58,237,.5)}
+        .btn-ghost{background:var(--glass);border:1px solid var(--glass-border);color:var(--text);backdrop-filter:blur(10px)}
+        .btn-ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.08)}
+
+        .scroll-hint{
+            position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+            color:var(--muted);font-size:12px;display:flex;flex-direction:column;
+            align-items:center;gap:6px;animation:bob 2s ease-in-out infinite;
+        }
+        @keyframes bob{50%{transform:translate(-50%,8px)}}
+        .scroll-hint .mouse{width:22px;height:36px;border:1.5px solid var(--muted);border-radius:12px;position:relative}
+        .scroll-hint .mouse::after{
+            content:'';position:absolute;top:7px;left:50%;width:3px;height:7px;
+            background:var(--muted);border-radius:2px;transform:translateX(-50%);
+            animation:wheel 1.6s ease-in-out infinite;
+        }
+        @keyframes wheel{50%{transform:translate(-50%,8px);opacity:.3}}
+
+        /* ===== Sections ===== */
+        section{padding:80px 0}
+        .sec-head{text-align:center;margin-bottom:48px}
+        .sec-head .kicker{
+            display:inline-block;font-size:12px;font-weight:700;letter-spacing:3px;
+            text-transform:uppercase;color:var(--cyan);margin-bottom:12px;
+        }
+        .sec-head h2{
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(28px,4.5vw,44px);font-weight:700;letter-spacing:-1px;
+        }
+        .sec-head h2 span{
+            background:var(--gradient);-webkit-background-clip:text;
+            background-clip:text;-webkit-text-fill-color:transparent;
+        }
+
+        /* ===== Skills ===== */
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+        .skill-card{
+            background:var(--glass);border:1px solid var(--glass-border);
+            border-radius:var(--radius);padding:24px;
+            backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+            transition:transform .3s,border-color .3s,background .3s;
+        }
+        .skill-card:hover{
+            transform:translateY(-5px);
+            border-color:rgba(124,58,237,.4);
+            background:rgba(124,58,237,.06);
+        }
+        .skill-card h3{
+            font-size:14px;font-weight:700;color:var(--cyan);margin-bottom:14px;
+            display:flex;align-items:center;gap:8px;
+        }
+        .skill-card h3::before{
+            content:'';width:6px;height:6px;border-radius:50%;
+            background:var(--gradient);box-shadow:0 0 12px var(--violet);
+        }
+        .chips{display:flex;flex-wrap:wrap;gap:8px}
+        .chip{
+            font-size:12.5px;padding:5px 12px;border-radius:999px;
+            background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+            color:#c9cee0;transition:.25s;
+        }
+        .chip:hover{
+            background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.5);
+            color:#fff;transform:translateY(-2px);
+        }
+
+        /* ===== Filters ===== */
+        .filters{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:40px}
+        .filter-btn{
+            font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;
+            padding:9px 22px;border-radius:999px;cursor:pointer;
+            border:1px solid var(--glass-border);background:var(--glass);
+            color:var(--muted);transition:.3s;backdrop-filter:blur(10px);
+        }
+        .filter-btn:hover{color:#fff;border-color:rgba(255,255,255,.25)}
+        .filter-btn.active{
+            background:var(--gradient);color:#fff;border-color:transparent;
+            box-shadow:0 8px 30px rgba(124,58,237,.35);
+        }
+
+        /* ===== Projects ===== */
+        .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+        .project-card{
+            position:relative;background:var(--glass);border:1px solid var(--glass-border);
+            border-radius:var(--radius);padding:26px;
+            backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+            overflow:hidden;
+            transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s;
+        }
+        .project-card::before{
+            content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+            background:linear-gradient(135deg,transparent 40%,rgba(124,58,237,.5),rgba(6,182,212,.4),transparent 70%);
+            -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            -webkit-mask-composite:xor;mask-composite:exclude;
+            opacity:0;transition:opacity .4s;pointer-events:none;
+        }
+        .project-card::after{
+            content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
+            transition:opacity .4s;
+            background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(124,58,237,.14),transparent 45%);
+        }
+        .project-card:hover::before,.project-card:hover::after{opacity:1}
+        .project-card:hover{
+            border-color:transparent;
+            box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 60px rgba(124,58,237,.12);
+            transform:translateY(-4px);
+        }
+        .project-card .cat{
+            display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;
+            text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:14px;
+        }
+        .cat-flutter{background:rgba(6,182,212,.15);color:#67e8f9;border:1px solid rgba(6,182,212,.3)}
+        .cat-backend{background:rgba(124,58,237,.15);color:#c4b5fd;border:1px solid rgba(124,58,237,.3)}
+        .cat-fullstack{background:rgba(244,114,182,.15);color:#f9a8d4;border:1px solid rgba(244,114,182,.3)}
+        .project-card h3{
+            font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;
+            margin-bottom:12px;color:#fff;letter-spacing:-.3px;
+        }
+        .project-card p{font-size:14px;color:var(--muted);margin-bottom:18px;line-height:1.75}
+        .project-card .chips{margin-bottom:20px}
+        .project-card .chips .chip{font-size:11.5px;padding:4px 10px}
+
+        .links{display:flex;gap:10px;flex-wrap:wrap}
+        .links a{
+            font-size:13px;font-weight:700;text-decoration:none;padding:8px 16px;
+            border-radius:10px;transition:.25s;display:inline-flex;align-items:center;gap:6px;
+        }
+        .link-live{background:rgba(6,182,212,.12);color:#67e8f9;border:1px solid rgba(6,182,212,.25)}
+        .link-live:hover{background:rgba(6,182,212,.25);transform:translateY(-2px)}
+        .link-git{background:rgba(255,255,255,.05);color:#c9cee0;border:1px solid rgba(255,255,255,.1)}
+        .link-git:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+        /* ===== Contact ===== */
+        .contact-card{
+            background:var(--glass);border:1px solid var(--glass-border);
+            border-radius:28px;padding:56px 32px;text-align:center;
+            backdrop-filter:blur(16px);position:relative;overflow:hidden;
+        }
+        .contact-card::before{
+            content:'';position:absolute;width:400px;height:400px;
+            background:radial-gradient(circle,rgba(124,58,237,.25),transparent 70%);
+            top:-200px;left:50%;transform:translateX(-50%);pointer-events:none;
+        }
+        .contact-card h2{
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(26px,4vw,40px);margin-bottom:12px;position:relative;
+        }
+        .contact-card p{color:var(--muted);margin-bottom:32px;position:relative}
+        .contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;position:relative}
+        .contact-links a{
+            display:inline-flex;align-items:center;gap:10px;padding:14px 26px;
+            border-radius:999px;background:rgba(255,255,255,.05);
+            border:1px solid var(--glass-border);color:var(--text);
+            text-decoration:none;font-weight:600;font-size:14px;transition:.3s;
+        }
+        .contact-links a:hover{
+            background:rgba(124,58,237,.15);border-color:rgba(124,58,237,.5);
+            transform:translateY(-3px);box-shadow:0 12px 30px rgba(124,58,237,.2);
+        }
+        .contact-links svg{width:18px;height:18px;flex-shrink:0}
+
+        footer{text-align:center;padding:40px 0 60px;color:var(--muted);font-size:13px}
+        footer .heart{color:var(--pink)}
+
+        /* ===== Animations ===== */
+        .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+        .reveal.in{opacity:1;transform:translateY(0)}
+        @keyframes cardIn{
+            from{opacity:0;transform:translateY(24px) scale(.97)}
+            to{opacity:1;transform:translateY(0) scale(1)}
+        }
+        .project-card.enter{animation:cardIn .6s cubic-bezier(.2,.8,.2,1) backwards}
+
+        /* ===== Responsive ===== */
+        @media (max-width:600px){
+            .hero{min-height:80vh}
+            .avatar{width:120px;height:120px;font-size:38px}
+            .nav-inner a{padding:7px 12px;font-size:12.5px}
+            .projects-grid{grid-template-columns:1fr}
+            section{padding:60px 0}
+            .contact-card{padding:40px 20px}
+        }
+        @media (prefers-reduced-motion:reduce){
+            *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="profile">
-            <h1 id="dev-name">جاري التحميل...</h1>
-            <p id="dev-title"></p>
-        </div>
-        
-        <div class="filters">
-            <button class="btn" onclick="filterProjects('all')">الكل</button>
-            <button class="btn" onclick="filterProjects('flutter')">Flutter</button>
-            <button class="btn" onclick="filterProjects('backend')">Backend</button>
-            <button class="btn" onclick="filterProjects('frontend')">Frontend</button>
-        </div>
+    <canvas id="bg-canvas"></canvas>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="noise"></div>
 
-        <div id="projects-list"></div>
-    </div>
+    <nav>
+        <div class="nav-inner">
+            <a href="#home">الرئيسية</a>
+            <a href="#skills">المهارات</a>
+            <a href="#projects">المشاريع</a>
+            <a href="#contact">تواصل</a>
+        </div>
+    </nav>
+
+    <header class="hero wrap" id="home">
+        <div class="avatar" id="avatar">AS</div>
+        <h1 id="dev-name">Ahmed Shawky</h1>
+        <div class="role"><span id="typed"></span><span class="cursor"></span></div>
+        <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">شوف المشاريع 🚀</a>
+            <a href="#contact" class="btn btn-ghost">تواصل معايا</a>
+        </div>
+        <div class="scroll-hint">
+            <div class="mouse"></div>
+            <span>انزل تحت</span>
+        </div>
+    </header>
+
+    <section id="skills">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <span class="kicker">Skills</span>
+                <h2>المهارات <span>التقنية</span></h2>
+            </div>
+            <div class="skills-grid" id="skills-grid"></div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <span class="kicker">Portfolio</span>
+                <h2>أحدث <span>المشاريع</span></h2>
+            </div>
+            <div class="filters" id="filters"></div>
+            <div class="projects-grid" id="projects-grid"></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="wrap">
+            <div class="contact-card reveal">
+                <h2>يلا نشتغل مع بعض ✨</h2>
+                <p>لو عندك فكرة أو مشروع، أنا جاهز. كلمني في أي وقت.</p>
+                <div class="contact-links" id="contact-links"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            صُنع بـ <span class="heart">♥</span> — <span id="footer-name">Ahmed Shawky</span> © <span id="year"></span>
+        </div>
+    </footer>
 
     <script>
+        /* ============ Cursor Glow ============ */
+        const glow = document.getElementById('cursorGlow');
+        let gx = innerWidth / 2, gy = innerHeight / 2, tx = gx, ty = gy;
+        addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+        (function animateGlow() {
+            gx += (tx - gx) * 0.08;
+            gy += (ty - gy) * 0.08;
+            glow.style.left = gx + 'px';
+            glow.style.top = gy + 'px';
+            requestAnimationFrame(animateGlow);
+        })();
+
+        /* ============ Particles Canvas ============ */
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+        const mouse = { x: -9999, y: -9999 };
+
+        function resizeCanvas() {
+            W = canvas.width = innerWidth;
+            H = canvas.height = innerHeight;
+            const count = Math.min(85, Math.floor((W * H) / 22000));
+            particles = Array.from({ length: count }, () => ({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35,
+                r: Math.random() * 1.6 + 0.6
+            }));
+        }
+        resizeCanvas();
+        addEventListener('resize', resizeCanvas);
+        addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, W, H);
+            for (const p of particles) {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > W) p.vx *= -1;
+                if (p.y < 0 || p.y > H) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(160,170,255,0.5)';
+                ctx.fill();
+            }
+            for (let i = 0; i < particles.length; i++) {
+                const a = particles[i];
+                for (let j = i + 1; j < particles.length; j++) {
+                    const b = particles[j];
+                    const dx = a.x - b.x, dy = a.y - b.y;
+                    const d2 = dx * dx + dy * dy;
+                    if (d2 < 14400) {
+                        const op = 1 - Math.sqrt(d2) / 120;
+                        ctx.strokeStyle = `rgba(124,58,237,${op * 0.18})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                }
+                const mdx = a.x - mouse.x, mdy = a.y - mouse.y;
+                const md2 = mdx * mdx + mdy * mdy;
+                if (md2 < 32400) {
+                    const op = 1 - Math.sqrt(md2) / 180;
+                    ctx.strokeStyle = `rgba(6,182,212,${op * 0.3})`;
+                    ctx.lineWidth = 0.7;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+            }
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+
+        /* ============ Helpers ============ */
+        const skillLabels = {
+            languages: 'لغات البرمجة',
+            mobile: 'تطبيقات الموبايل',
+            backend: 'الـ Backend',
+            devops_tools: 'أدوات و DevOps',
+            concepts: 'مفاهيم برمجية'
+        };
+        const catLabels = { flutter: 'Flutter', backend: 'Backend', fullstack: 'Full-Stack' };
+
+        function isValidUrl(u) {
+            if (!u) return false;
+            u = u.trim();
+            if (!/^https?:\/\//i.test(u)) return false;
+            try {
+                const url = new URL(u);
+                if (url.hostname.includes('bit.ly') && (url.pathname === '/' || url.pathname === '')) return false;
+                return true;
+            } catch { return false; }
+        }
+
+        /* ============ Typing ============ */
+        function typeTitle(text) {
+            const el = document.getElementById('typed');
+            let i = 0;
+            (function step() {
+                if (i <= text.length) {
+                    el.textContent = text.slice(0, i);
+                    i++;
+                    setTimeout(step, 45);
+                }
+            })();
+        }
+
+        /* ============ Reveal observer ============ */
+        function observeReveals() {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        }
+
+        /* ============ Icons ============ */
+        const icons = {
+            mail: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>`,
+            phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+            linkedin: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>`,
+            github: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.38-5.25 5.66.41.35.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>`
+        };
+
+        /* ============ Render Functions ============ */
         let allProjects = [];
 
-        // جلب البيانات تلقائياً من ملف JSON الخاص بك
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('dev-name').innerText = data.name;
-                document.getElementById('dev-title').innerText = data.title;
-                allProjects = data.projects;
-                renderProjects(allProjects);
+        function renderFilters(cats) {
+            const box = document.getElementById('filters');
+            box.innerHTML = '';
+            cats.forEach(c => {
+                const b = document.createElement('button');
+                b.className = 'filter-btn' + (c === 'all' ? ' active' : '');
+                b.textContent = c === 'all' ? 'الكل' : (catLabels[c] || c);
+                b.addEventListener('click', () => {
+                    box.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+                    b.classList.add('active');
+                    const filtered = c === 'all' ? allProjects : allProjects.filter(p => p.category === c);
+                    renderProjects(filtered);
+                });
+                box.appendChild(b);
             });
+        }
 
-        function renderProjects(projects) {
-            const list = document.getElementById('projects-list');
-            list.innerHTML = '';
-            projects.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'project-card';
+        function renderProjects(list) {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+            list.forEach((p, i) => {
+                const card = document.createElement('article');
+                card.className = 'project-card enter';
+                card.style.animationDelay = (i * 0.07) + 's';
+
+                const liveOk = isValidUrl(p.live_url);
+                const gitOk = isValidUrl(p.github_url);
+                const catLabel = catLabels[p.category] || p.category;
+
                 card.innerHTML = `
+                    <span class="cat cat-${p.category}">${catLabel}</span>
                     <h3>${p.title}</h3>
                     <p>${p.description}</p>
-                    <div style="margin-bottom: 10px;">
-                        ${p.technologies.map(t => `<span class="tech-badge">${t}</span>`).join('')}
-                    </div>
+                    <div class="chips">${(p.technologies || []).map(t => `<span class="chip">${t}</span>`).join('')}</div>
                     <div class="links">
-                        <a href="${p.live_url}" target="_blank">رابط المشروع 🌐</a>
-                        <a href="${p.github_url}" target="_blank">كود جيتهاب 💻</a>
+                        ${liveOk ? `<a class="link-live" href="${p.live_url.trim()}" target="_blank" rel="noopener">المشروع 🌐</a>` : ''}
+                        ${gitOk ? `<a class="link-git" href="${p.github_url.trim()}" target="_blank" rel="noopener">GitHub 💻</a>` : ''}
                     </div>
                 `;
-                list.appendChild(card);
+
+                card.addEventListener('mousemove', e => {
+                    const r = card.getBoundingClientRect();
+                    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+                });
+
+                grid.appendChild(card);
             });
         }
 
-        function filterProjects(category) {
-            if (category === 'all') {
-                renderProjects(allProjects);
-            } else {
-                const filtered = allProjects.filter(p => p.category === category);
-                renderProjects(filtered);
-            }
+        function renderContact(c) {
+            const box = document.getElementById('contact-links');
+            const items = [];
+            if (c.email)    items.push({ href: 'mailto:' + c.email, label: c.email, icon: icons.mail });
+            if (c.phone)    items.push({ href: 'tel:' + c.phone, label: c.phone, icon: icons.phone });
+            if (c.linkedin) items.push({ href: c.linkedin, label: 'LinkedIn', icon: icons.linkedin });
+            if (c.github)   items.push({ href: c.github, label: 'GitHub', icon: icons.github });
+
+            box.innerHTML = items.map(it => {
+                const isHttp = it.href.startsWith('http');
+                const attr = isHttp ? 'target="_blank" rel="noopener"' : '';
+                return `<a href="${it.href}" ${attr}>${it.icon}<span>${it.label}</span></a>`;
+            }).join('');
         }
+
+        /* ============ Load Data ============ */
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        fetch('data.json')
+            .then(r => { if (!r.ok) throw new Error('data.json not found'); return r.json(); })
+            .then(data => {
+                // Hero
+                document.getElementById('dev-name').textContent = data.name || 'Portfolio';
+                document.title = `${data.name || 'Portfolio'} — Portfolio`;
+                document.getElementById('footer-name').textContent = data.name || 'Portfolio';
+
+                const initials = (data.name || 'A S')
+                    .split(' ')
+                    .map(w => w[0])
+                    .slice(0, 2)
+                    .join('')
+                    .toUpperCase();
+                document.getElementById('avatar').textContent = initials;
+
+                typeTitle(data.title || '');
+
+                // Skills
+                const sg = document.getElementById('skills-grid');
+                Object.entries(data.skills || {}).forEach(([key, arr]) => {
+                    if (!Array.isArray(arr) || !arr.length) return;
+                    const div = document.createElement('div');
+                    div.className = 'skill-card';
+                    div.innerHTML = `
+                        <h3>${skillLabels[key] || key}</h3>
+                        <div class="chips">${arr.map(s => `<span class="chip">${s}</span>`).join('')}</div>
+                    `;
+                    sg.appendChild(div);
+                });
+
+                // Projects
+                allProjects = (data.projects || []).map(p => ({
+                    ...p,
+                    category: p.category || 'other'
+                }));
+                const cats = ['all', ...new Set(allProjects.map(p => p.category))];
+                renderFilters(cats);
+                renderProjects(allProjects);
+
+                // Contact
+                renderContact(data.contact || {});
+
+                // Reveals
+                observeReveals();
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('dev-name').textContent = 'تعذر تحميل البيانات';
+                document.querySelector('.role').innerHTML = '<span style="color:#f472b6">تأكد إن data.json في نفس الفولدر</span>';
+            });
     </script>
 </body>
 </html>
