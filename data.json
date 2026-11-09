@@ -58,7 +58,7 @@
       "category": "backend",
       "description": "An enterprise HR management system built for employee directory, department organization, and leave request management. Features JWT authentication, BCrypt password hashing, and automated deployment pipelines.",
       "technologies": ["Java", "Spring Boot", "Spring Security", "JWT", "BCrypt", "Spring Data JPA", "Hibernate", "MySQL", "Docker", "GitHub Actions (CI/CD)"],
-      "live_url": "https://bit.ly",
+      "live_url": "",
       "github_url": "https://github.com"
     },
     {
