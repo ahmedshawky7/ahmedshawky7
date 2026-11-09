@@ -1,0 +1,310 @@
+{
+  "personal": {
+    "name": "Ahmed Shawky",
+    "phone": "+201114920703",
+    "email": "ahmedeltabakh703@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/ahmed-shawky2/",
+    "github": "https://github.com/ahmedshawky7",
+    "portfolio": "https://ahmed-shawky-portfolio.netlify.app/"
+  },
+  "education": {
+    "university": "Menoufia University",
+    "location": "Egypt",
+    "degree": "Bachelor's Degree in Computer Science",
+    "period": "2021 -- 2025",
+    "courses": "Studied Object-Oriented Programming, Data Structures, Algorithms, Software Engineering, Database Systems, and Web Architecture.",
+    "graduation_project": "Graduation Project: DR-FIT -- Fitness Application."
+  },
+  "experience": {
+    "organization": "Digital Egypt Pioneers Initiative (DEPI)",
+    "location": "Egypt",
+    "track": "Cross-Platform Mobile Development Track",
+    "period": "April 2024 -- October 2024",
+    "bullets": [
+      "Developed cross-platform mobile applications using Flutter, Clean Architecture, REST APIs, and local databases.",
+      "Collaborated in Agile team environments, strengthening problem-solving, communication, and delivery skills."
+    ]
+  },
+  "languages": [
+    "Arabic (Native)",
+    "English (Professional)"
+  ],
+  "profiles": {
+    "flutter": {
+      "summary": "Junior Flutter Developer with hands-on experience building cross-platform mobile applications using Dart and Flutter. Skilled in Clean Architecture, Cubit/BLoC, REST API integration, Firebase, and local data storage with Hive and SQLite.",
+      "experience_title": "Cross-Platform Mobile Development Track",
+      "projects": [
+        {
+          "name": "Noor Quran -- Islamic Mobile App",
+          "url": "https://github.com/ahmedshawky7/noor_quran",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/noor_quran"
+            }
+          ],
+          "bullets": [
+            "Architected a Flutter Quran application using Clean Architecture and Cubit/BLoC for Quran reading and audio recitation.",
+            "Integrated background audio playback, Hive and SQLite local storage, and Arabic RTL support."
+          ]
+        },
+        {
+          "name": "DR-FIT -- Fitness App",
+          "url": "https://github.com/ashraf-abdo/DR-FIT",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ashraf-abdo/DR-FIT"
+            }
+          ],
+          "bullets": [
+            "Co-developed a fitness tracking application using Flutter and Clean Architecture with Cubit for state management.",
+            "Integrated Firebase Authentication, Cloud Firestore, and Firebase Storage."
+          ]
+        },
+        {
+          "name": "E-Commerce App",
+          "url": "https://github.com/ahmedshawky7/ecommerce_app",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/ecommerce_app"
+            }
+          ],
+          "bullets": [
+            "Built a Flutter e-commerce application with product browsing and shopping workflows.",
+            "Integrated REST APIs and structured the application using reusable components and state management."
+          ]
+        },
+        {
+          "name": "Tech News App",
+          "url": "https://github.com/ahmedshawky7/news_app",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/news_app"
+            }
+          ],
+          "bullets": [
+            "Developed a Flutter news application with API-driven content and multi-language support.",
+            "Implemented English and Arabic localization with responsive user interfaces."
+          ]
+        }
+      ],
+      "skills": [
+        [
+          "Languages",
+          "Dart, Java, SQL"
+        ],
+        [
+          "Mobile Development",
+          "Flutter, Android, iOS, Material Design, Responsive UI"
+        ],
+        [
+          "State Management",
+          "Cubit, BLoC"
+        ],
+        [
+          "Architecture",
+          "Clean Architecture, MVVM, SOLID Principles"
+        ],
+        [
+          "Backend Integration",
+          "REST APIs, Dio, Firebase Authentication, Cloud Firestore, Firebase Storage"
+        ],
+        [
+          "Local Storage",
+          "Hive, SQLite, SharedPreferences"
+        ],
+        [
+          "Tools",
+          "Git, GitHub, Postman"
+        ]
+      ]
+    },
+    "backend": {
+      "summary": "Junior Java Backend Developer with hands-on experience building RESTful APIs using Java and Spring Boot. Skilled in Spring Security, JWT authentication, role-based access control, Spring Data JPA, Hibernate, and MySQL, with a focus on clean and maintainable backend architecture.",
+      "experience_title": "Mobile Development Track",
+      "projects": [
+        {
+          "name": "E-Commerce Platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/ecommerce_app"
+            },
+            {
+              "label": "Live Demo",
+              "url": "https://ecommerceapp-production-4a9c.up.railway.app/"
+            }
+          ],
+          "bullets": [
+            "Developed a full-stack e-commerce platform with Spring Boot REST APIs, customer storefront, and admin dashboard.",
+            "Implemented JWT refresh tokens, role-based access control, product management, cart, checkout, orders, and sales analytics.",
+            "Integrated Stripe payments, Redis caching, RabbitMQ messaging, MySQL, Cloudinary, Swagger/OpenAPI, and Docker."
+          ]
+        },
+        {
+          "name": "HR Management System",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/hr-management-system"
+            }
+          ],
+          "bullets": [
+            "Built a Spring Boot HR system for employee, department, and leave request management.",
+            "Implemented JWT authentication, BCrypt password hashing, and role-based access control.",
+            "Used Spring Data JPA, Hibernate, MySQL, Docker, and GitHub Actions for persistence and CI/CD."
+          ]
+        },
+        {
+          "name": "Real-Time Chat Application",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/chat-app"
+            }
+          ],
+          "bullets": [
+            "Developed a real-time chat backend using Spring Boot and WebSocket for bidirectional messaging.",
+            "Implemented JWT-secured communication with REST APIs for authentication, conversations, messages, and read receipts."
+          ]
+        }
+      ],
+      "skills": [
+        [
+          "Languages",
+          "Java, SQL, Dart"
+        ],
+        [
+          "Backend",
+          "Spring Boot, Spring MVC, REST APIs, WebSocket"
+        ],
+        [
+          "Security",
+          "Spring Security, JWT, Authentication, Authorization, Role-Based Access Control, BCrypt"
+        ],
+        [
+          "Data Access",
+          "Spring Data JPA, Hibernate, JDBC"
+        ],
+        [
+          "Databases",
+          "MySQL, SQL"
+        ],
+        [
+          "Testing",
+          "JUnit, Mockito, Spring Security Test, Postman"
+        ],
+        [
+          "Build & Tools",
+          "Maven, Git, GitHub, IntelliJ IDEA"
+        ],
+        [
+          "DevOps",
+          "Docker, Docker Compose, GitHub Actions, CI/CD"
+        ],
+        [
+          "Architecture & Principles",
+          "OOP, SOLID, Clean Architecture, Design Principles"
+        ]
+      ]
+    },
+    "fullstack": {
+      "summary": "Software Engineer focused on Full-Stack Development with Flutter and Java Spring Boot. Experienced in building cross-platform mobile applications and secure backend REST APIs using Clean Architecture, Cubit/BLoC, Spring Security, and JWT.",
+      "experience_title": "Cross-Platform Mobile Development Track",
+      "projects": [
+        {
+          "name": "E-Commerce Platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/ecommerce_app"
+            },
+            {
+              "label": "Live Demo",
+              "url": "https://ecommerceapp-production-4a9c.up.railway.app/"
+            }
+          ],
+          "bullets": [
+            "Built a full-stack platform using Spring Boot REST APIs with JWT authentication, refresh tokens, and role-based access control.",
+            "Integrated Stripe payments, Redis caching, RabbitMQ, Cloudinary, MySQL, and Docker."
+          ]
+        },
+        {
+          "name": "Noor Quran -- Islamic Mobile App",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/noor_quran"
+            }
+          ],
+          "bullets": [
+            "Architected a Flutter application using Clean Architecture and Cubit/BLoC for Quran reading and audio recitation.",
+            "Integrated background audio playback, Hive and SQLite local storage, and Arabic RTL support."
+          ]
+        },
+        {
+          "name": "DR-FIT -- Fitness App",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ashraf-abdo/DR-FIT"
+            }
+          ],
+          "bullets": [
+            "Co-developed a fitness tracking application using Flutter and Clean Architecture with Cubit for state management.",
+            "Integrated Firebase Authentication, Cloud Firestore, and Firebase Storage."
+          ]
+        },
+        {
+          "name": "HR Management System",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/hr-management-system"
+            }
+          ],
+          "bullets": [
+            "Engineered a Spring Boot HR system with JWT authentication, role-based access control, MySQL, Docker, and GitHub Actions."
+          ]
+        },
+        {
+          "name": "Real-Time Chat Application",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/chat-app"
+            }
+          ],
+          "bullets": [
+            "Developed a real-time messaging backend using Spring Boot WebSocket, Spring Security, and JWT."
+          ]
+        }
+      ],
+      "skills": [
+        [
+          "Languages",
+          "Java, Dart, SQL, C++"
+        ],
+        [
+          "Mobile (Flutter)",
+          "Cross-Platform Development, Clean Architecture, MVVM, Cubit, BLoC, Dio, Hive, SQLite, GetIt"
+        ],
+        [
+          "Backend",
+          "Spring Boot, Spring Security, RESTful APIs, WebSocket, JWT, BCrypt, Spring Data JPA, Hibernate, RabbitMQ, Redis"
+        ],
+        [
+          "DevOps & Tools",
+          "MySQL, Docker, Docker Compose, GitHub Actions, Cloudinary, Stripe, Postman, Git, GitHub"
+        ],
+        [
+          "Concepts",
+          "OOP, SOLID Principles, Clean Architecture, Design Patterns"
+        ]
+      ]
+    }
+  }
+}
