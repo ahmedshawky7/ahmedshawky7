@@ -1,28 +1,13 @@
 import json
 import os
-import requests
+from google import genai
 
 # 1. قراءة ملف البيانات الموحد
 with open('data.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
-# 2. رابط الـ Endpoint الصحيح والمباشر لـ Gemini
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-API_URL = f"https://googleapis.com{GEMINI_API_KEY}"
-
-def ask_ai(prompt):
-    headers = {
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}]
-    }
-    response = requests.post(API_URL, headers=headers, json=payload)
-    
-    if response.status_code != 200:
-        raise Exception(f"API Error: {response.text}")
-        
-    return response.json()['candidates']['content']['parts']['text']
+# 2. استدعاء الـ SDK الرسمي لـ Gemini
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 cv_types = ['flutter', 'backend', 'fullstack']
 
@@ -39,12 +24,18 @@ for cv_type in cv_types:
     3. Output ONLY the raw markdown content without any chat or wrapper like ```markdown.
     """
     
-    markdown_content = ask_ai(prompt)
+    # استخدام الموديل المستقر والسريع عبر المكتبة الرسمية
+    response = client.models.generate_content(
+        model='gemini-2.5-flash',
+        contents=prompt,
+    )
     
-    # تحويل الـ Markdown وحفظه
-    os.makedirs('cvs', exist_ok=True)
+    markdown_content = response.text
+    
+    # حفظ الملفات الناتجة
+    os.makedirs('cvs', os.path.ok=True)
     md_file_path = f'cvs/{cv_type}_cv.md'
     with open(md_file_path, 'w', encoding='utf-8') as out_file:
         out_file.write(markdown_content)
 
-print("CV Text generated successfully!")
+print("CV Text generated successfully via Official SDK!")
