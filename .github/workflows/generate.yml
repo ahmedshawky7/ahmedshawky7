@@ -1,0 +1,44 @@
+name: Auto Generate ATS CVs
+
+on:
+  push:
+    paths:
+      - 'data.json' # يشتغل فقط لما تعدل ملف البيانات
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install Dependencies
+      run: pip install requests
+
+    - name: Run CV Content Generator
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: python generate_cvs.py
+
+    - name: Install Markdown to PDF tool
+      run: sudo apt-get install -y pandoc weasyprint || npm install --global md-to-pdf
+
+    - name: Convert MD to PDF
+      run: |
+        # تحويل الملفات الناتجة إلى PDF احترافي
+        npx md-to-pdf cvs/flutter_cv.md
+        npx md-to-pdf cvs/backend_cv.md
+        npx md-to-pdf cvs/fullstack_cv.md
+
+    - name: Commit and Push Generated PDFs
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add cvs/*.pdf
+        git commit -m "Automated PDF CV update [skip ci]" || echo "No changes to commit"
+        git push
