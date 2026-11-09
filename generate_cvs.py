@@ -1,35 +1,124 @@
 
 import json
 import os
+import time
+import random
+
 from pathlib import Path
 from google import genai
 
-# 1. Load unified CV data
-with open("data.json", "r", encoding="utf-8") as file:
+
+# =====================================================
+# 1. Load CV Data
+# =====================================================
+
+DATA_FILE = Path("data.json")
+OUTPUT_DIR = Path("cvs")
+
+if not DATA_FILE.exists():
+    raise FileNotFoundError("data.json was not found!")
+
+with DATA_FILE.open("r", encoding="utf-8") as file:
     data = json.load(file)
 
-# 2. Check Gemini API Key
+
+# =====================================================
+# 2. Initialize Gemini Client
+# =====================================================
+
 api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
     raise ValueError("GEMINI_API_KEY is missing!")
 
-# 3. Initialize Gemini client
 client = genai.Client(api_key=api_key)
 
-# 4. CV types
-cv_types = ["flutter", "backend", "fullstack"]
+MODEL_NAME = "gemini-3.8-flash"
 
-# 5. Create output directory
-output_dir = Path("cvs")
-output_dir.mkdir(parents=True, exist_ok=True)
 
-# 6. Generate each CV
-for cv_type in cv_types:
+# =====================================================
+# 3. Create Output Directory
+# =====================================================
 
-    print(f"\nGenerating {cv_type} CV...")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    prompt = f"""
+
+# =====================================================
+# 4. Generate Content With Retry
+# =====================================================
+
+def generate_with_retry(prompt, max_attempts=5):
+
+    retryable_errors = [429, 500, 502, 503, 504]
+
+    for attempt in range(1, max_attempts + 1):
+
+        try:
+            print(f"Gemini request attempt {attempt}/{max_attempts}")
+
+            response = client.models.generate_content(
+                model=MODEL_NAME,
+                contents=prompt,
+            )
+
+            if not response.text:
+                raise ValueError("Gemini returned empty content!")
+
+            return response
+
+        except Exception as error:
+
+            status_code = getattr(error, "code", None)
+
+            if status_code not in retryable_errors:
+                raise
+
+            if attempt == max_attempts:
+                print("Maximum retry attempts reached!")
+                raise
+
+            wait_time = min(10 * (2 ** (attempt - 1)), 60)
+            wait_time += random.uniform(0, 3)
+
+            print(
+                f"Gemini temporarily unavailable "
+                f"(HTTP {status_code})."
+            )
+
+            print(
+                f"Retrying in {wait_time:.1f} seconds..."
+            )
+
+            time.sleep(wait_time)
+
+
+# =====================================================
+# 5. Clean Markdown Response
+# =====================================================
+
+def clean_markdown(content):
+
+    content = content.strip()
+
+    if content.startswith("```markdown"):
+        content = content[len("```markdown"):]
+
+    elif content.startswith("```"):
+        content = content[3:]
+
+    if content.endswith("```"):
+        content = content[:-3]
+
+    return content.strip()
+
+
+# =====================================================
+# 6. Generate CV Prompt
+# =====================================================
+
+def build_prompt(cv_type):
+
+    return f"""
 You are an expert ATS-optimized CV writer.
 
 Generate a professional CV in clean Markdown format
@@ -40,7 +129,7 @@ based on the following user data:
 Target Role:
 {cv_type} Developer
 
-Strict Instructions:
+STRICT INSTRUCTIONS:
 
 1. Filter projects to highlight mostly {cv_type}-relevant
    skills, technologies, and achievements.
@@ -57,7 +146,7 @@ Strict Instructions:
    Include relevant mobile, backend, and full-stack
    projects and technologies.
 
-5. Rewrite descriptions using strong action verbs.
+5. Rewrite project descriptions using strong action verbs.
 
 6. Optimize keywords for ATS systems.
 
@@ -69,50 +158,87 @@ Strict Instructions:
 9. Do not invent URLs. Use only the provided links.
    Omit invalid or placeholder links.
 
-10. Output ONLY raw Markdown.
-    Do not include ```markdown or any explanation.
+10. Keep contact information accurate.
 
+11. Output ONLY raw Markdown.
+    Do not include code fences or explanations.
 """
 
-    try:
-        response = client.models.generate_content(
-            model="gemini-3.8-flash",
-            contents=prompt,
-        )
 
-        markdown_content = response.text
+# =====================================================
+# 7. Generate All CVs
+# =====================================================
+
+cv_types = ["flutter", "backend", "fullstack"]
+
+successful_cvs = []
+failed_cvs = []
+
+for cv_type in cv_types:
+
+    print("\n" + "=" * 50)
+    print(f"Generating {cv_type.upper()} CV...")
+    print("=" * 50)
+
+    try:
+
+        prompt = build_prompt(cv_type)
+
+        response = generate_with_retry(prompt)
+
+        markdown_content = clean_markdown(response.text)
 
         if not markdown_content:
-            raise ValueError(
-                f"Gemini returned empty content for {cv_type}"
-            )
+            raise ValueError("Generated Markdown is empty!")
 
-        # Remove accidental Markdown code fences
-        markdown_content = markdown_content.strip()
-
-        if markdown_content.startswith("```markdown"):
-            markdown_content = markdown_content[len("```markdown"):]
-
-        elif markdown_content.startswith("```"):
-            markdown_content = markdown_content[3:]
-
-        if markdown_content.endswith("```"):
-            markdown_content = markdown_content[:-3]
-
-        markdown_content = markdown_content.strip()
-
-        # Save generated Markdown
-        md_file_path = output_dir / f"{cv_type}_cv.md"
+        md_file_path = OUTPUT_DIR / f"{cv_type}_cv.md"
 
         md_file_path.write_text(
             markdown_content,
             encoding="utf-8"
         )
 
+        successful_cvs.append(cv_type)
+
         print(f"Successfully generated: {md_file_path}")
 
     except Exception as error:
+
+        failed_cvs.append(cv_type)
+
         print(f"Failed to generate {cv_type} CV: {error}")
-        raise
+
+        # Continue generating the remaining CVs
+        continue
+
+
+# =====================================================
+# 8. Final Report
+# =====================================================
+
+print("\n" + "=" * 50)
+print("CV GENERATION SUMMARY")
+print("=" * 50)
+
+print(f"Successful CVs: {len(successful_cvs)}")
+print(f"Failed CVs: {len(failed_cvs)}")
+
+if successful_cvs:
+    print("\nSuccessfully generated:")
+
+    for cv in successful_cvs:
+        print(f"  - {cv}_cv.md")
+
+if failed_cvs:
+    print("\nFailed CVs:")
+
+    for cv in failed_cvs:
+        print(f"  - {cv}_cv.md")
+
+if failed_cvs:
+    raise RuntimeError(
+        "Some CVs failed to generate. "
+        "Check the logs and rerun the workflow."
+    )
 
 print("\nAll CVs generated successfully!")
