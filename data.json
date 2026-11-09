@@ -1,0 +1,88 @@
+{
+  "name": "Ahmed Shawky",
+  "title": "Software Engineer | Full-Stack (Flutter & Java Spring Boot)",
+  "contact": {
+    "phone": "+201114920703",
+    "email": "ahmedeltabakh703@gmail.com",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  "education": {
+    "university": "Menoufia University, Egypt",
+    "degree": "Bachelor’s Degree in Computer Science",
+    "duration": "2021 – 2025",
+    "details": [
+      "Studied OOP, Data Structures, Algorithms, Software Engineering, Database Systems, and Web Architecture.",
+      "Graduation Project: DR-FIT – Fitness & Health Mobile Application."
+    ]
+  },
+  "training": [
+    {
+      "organization": "Digital Egypt Pioneers Initiative (DEPI)",
+      "track": "Cross-Platform Mobile Development Track",
+      "duration": "April 2024 – October 2024",
+      "details": [
+        "Developed cross-platform mobile apps using Flutter, Clean Architecture, REST APIs, and local databases.",
+        "Built multiple mobile applications with diverse designs, features, and real-world use cases using REST APIs and Firebase.",
+        "Collaborated in Agile team environments, enhancing problem-solving, communication, and delivery skills."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "DR-FIT – Fitness App (Graduation Project)",
+      "category": "flutter",
+      "description": "A scalable fitness and health tracking mobile application. Features include authentication, user profiles, dynamic workout plans, and a nutrition system. Implemented community features like posts, comments, and reactions.",
+      "technologies": ["Flutter", "Dart", "Clean Architecture", "Cubit", "Dio", "Firebase", "Gemini API", "Google Maps", "GetIt", "FlutterSecureStorage"],
+      "live_url": "https://bit.ly",
+      "github_url": "https://github.com"
+    },
+    {
+      "title": "Noor Quran – Islamic Mobile App",
+      "category": "flutter",
+      "description": "An Islamic mobile application for Quran reading (QCF Mushaf), prayer times, Qibla, Adhkar, and Tafsir with native RTL multi-language support. Implemented location-based prayer calculations, compass-based Qibla, offline content, background audio playback, and local caching.",
+      "technologies": ["Flutter", "Dart", "Clean Architecture", "Cubit", "BLoC", "Hive", "SQLite"],
+      "live_url": "https://bit.ly",
+      "github_url": "https://github.com"
+    },
+    {
+      "title": "E-Commerce Platform",
+      "category": "backend",
+      "description": "A full-stack e-commerce platform featuring Spring Boot REST APIs, a customer storefront, and an administrative dashboard. Implemented secure authentication with JWT refresh tokens, role-based access control (RBAC), product management, shopping cart, checkout, orders, and sales analytics.",
+      "technologies": ["Java", "Spring Boot", "Spring Security", "JWT", "Spring Data JPA", "Hibernate", "MySQL", "Stripe", "Redis", "RabbitMQ", "Cloudinary", "Swagger/OpenAPI", "Docker"],
+      "live_url": "https://bit.ly",
+      "github_url": "https://github.com"
+    },
+    {
+      "title": "HR Management System",
+      "category": "backend",
+      "description": "An enterprise HR management system built for employee directory, department organization, and leave request management. Features JWT authentication, BCrypt password hashing, and automated deployment pipelines.",
+      "technologies": ["Java", "Spring Boot", "Spring Security", "JWT", "BCrypt", "Spring Data JPA", "Hibernate", "MySQL", "Docker", "GitHub Actions (CI/CD)"],
+      "live_url": "https://bit.ly",
+      "github_url": "https://github.com"
+    },
+    {
+      "title": "Real-Time Chat Application",
+      "category": "backend",
+      "description": "A real-time messaging backend platform supporting bidirectional communication. Implemented secured REST APIs for authentication, dynamic conversations, instant messaging, and message read receipts.",
+      "technologies": ["Java", "Spring Boot", "WebSocket", "Spring Security", "JWT", "MySQL"],
+      "live_url": "https://bit.ly",
+      "github_url": "https://github.com"
+    },
+    {
+      "title": "Tech News AI App",
+      "category": "flutter",
+      "description": "A real-time news aggregation mobile application consuming external REST APIs. Features an AI-powered integrated chatbot for interactive Q&A and image descriptions.",
+      "technologies": ["Flutter", "Dart", "Cubit", "REST APIs", "Gemini API"],
+      "live_url": "https://bit.ly",
+      "github_url": "https://github.com"
+    }
+  ],
+  "skills": {
+    "languages": ["Java", "Dart", "SQL", "C++"],
+    "mobile": ["Flutter", "Cross-Platform Development", "Clean Architecture", "MVVM", "Cubit", "BLoC", "Dio", "Hive", "SQLite", "GetIt", "Firebase"],
+    "backend": ["Spring Boot", "Spring MVC", "RESTful APIs", "WebSocket", "Spring Security", "JWT", "BCrypt", "Spring Data JPA", "Hibernate", "RabbitMQ", "Redis"],
+    "devops_tools": ["MySQL", "Docker", "Docker Compose", "GitHub Actions (CI/CD)", "Cloudinary", "Stripe", "Postman", "Git", "GitHub", "Maven", "IntelliJ IDEA"],
+    "concepts": ["OOP", "SOLID Principles", "Clean Architecture", "Design Patterns"]
+  }
+}
