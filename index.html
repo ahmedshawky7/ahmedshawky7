@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض أعمالي</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; color: #333; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .profile { text-align: center; margin-bottom: 40px; }
+        .filters { text-align: center; margin-bottom: 20px; }
+        .btn { padding: 8px 16px; margin: 5px; cursor: pointer; border: none; background: #007bff; color: white; border-radius: 4px; }
+        .project-card { background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .tech-badge { background: #e9ecef; padding: 3px 8px; margin: 2px; display: inline-block; font-size: 12px; border-radius: 4px; }
+        .links a { margin-left: 15px; color: #007bff; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <h1 id="dev-name">جاري التحميل...</h1>
+            <p id="dev-title"></p>
+        </div>
+        
+        <div class="filters">
+            <button class="btn" onclick="filterProjects('all')">الكل</button>
+            <button class="btn" onclick="filterProjects('flutter')">Flutter</button>
+            <button class="btn" onclick="filterProjects('backend')">Backend</button>
+            <button class="btn" onclick="filterProjects('frontend')">Frontend</button>
+        </div>
+
+        <div id="projects-list"></div>
+    </div>
+
+    <script>
+        let allProjects = [];
+
+        // جلب البيانات تلقائياً من ملف JSON الخاص بك
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('dev-name').innerText = data.name;
+                document.getElementById('dev-title').innerText = data.title;
+                allProjects = data.projects;
+                renderProjects(allProjects);
+            });
+
+        function renderProjects(projects) {
+            const list = document.getElementById('projects-list');
+            list.innerHTML = '';
+            projects.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <h3>${p.title}</h3>
+                    <p>${p.description}</p>
+                    <div style="margin-bottom: 10px;">
+                        ${p.technologies.map(t => `<span class="tech-badge">${t}</span>`).join('')}
+                    </div>
+                    <div class="links">
+                        <a href="${p.live_url}" target="_blank">رابط المشروع 🌐</a>
+                        <a href="${p.github_url}" target="_blank">كود جيتهاب 💻</a>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function filterProjects(category) {
+            if (category === 'all') {
+                renderProjects(allProjects);
+            } else {
+                const filtered = allProjects.filter(p => p.category === category);
+                renderProjects(filtered);
+            }
+        }
+    </script>
+</body>
+</html>
