@@ -6,16 +6,24 @@ import requests
 with open('data.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
+# 2. إعدادات الـ API الصحيحة لـ Gemini
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-# استخدام موديل gemini-2.5-flash السريع والممتاز
-API_URL = f"https://googleapis.com{GEMINI_API_KEY}"
+API_URL = "https://googleapis.com"
 
 def ask_ai(prompt):
-    headers = {"Content-Type": "application/json"}
+    # إرسال المفتاح عبر الـ Headers بدلاً من دمج الرابط
+    headers = {
+        "Content-Type": "application/json",
+        "x-goog-api-key": GEMINI_API_KEY
+    }
     payload = {
         "contents": [{"parts": [{"text": prompt}]}]
     }
     response = requests.post(API_URL, headers=headers, json=payload)
+    
+    if response.status_code != 200:
+        raise Exception(f"API Error: {response.text}")
+        
     return response.json()['candidates'][0]['content']['parts'][0]['text']
 
 cv_types = ['flutter', 'backend', 'fullstack']
@@ -35,11 +43,10 @@ for cv_type in cv_types:
     
     markdown_content = ask_ai(prompt)
     
-    # تحويل الـ Markdown إلى HTML بسيط ثم إلى PDF
+    # تحويل الـ Markdown وحفظه
     os.makedirs('cvs', exist_ok=True)
     md_file_path = f'cvs/{cv_type}_cv.md'
     with open(md_file_path, 'w', encoding='utf-8') as out_file:
         out_file.write(markdown_content)
 
-print("CV Text generated. Converting to PDF...")
-# سنترك مهمة التحويل للـ GitHub Action باستخدام أداة سريعة
+print("CV Text generated successfully!")
