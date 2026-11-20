@@ -571,7 +571,7 @@
         /* ============ Load Data ============ */
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        fetch('data.json')
+        fetch('data/data.json')
             .then(r => { if (!r.ok) throw new Error('data.json not found'); return r.json(); })
             .then(data => {
                 // Hero
