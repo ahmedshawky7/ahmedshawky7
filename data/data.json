@@ -160,10 +160,6 @@
             {
               "label": "GitHub",
               "url": "https://github.com/ahmedshawky7/ecommerce_app"
-            },
-            {
-              "label": "Live Demo",
-              "url": "https://ecommerceapp-production-4a9c.up.railway.app/"
             }
           ],
           "bullets": [
@@ -262,10 +258,6 @@
             {
               "label": "GitHub",
               "url": "https://github.com/ahmedshawky7/ecommerce_app"
-            },
-            {
-              "label": "Live Demo",
-              "url": "https://ecommerceapp-production-4a9c.up.railway.app/"
             }
           ],
           "bullets": [
@@ -325,31 +317,31 @@
         }
       ],
       "skills": [
-      [
-        "Languages",
-        "Java, Dart, JavaScript, SQL, HTML5, CSS3, C++"
-      ],
-      [
-        "Mobile (Flutter)",
-        "Cross-Platform Development, Clean Architecture, MVVM, Cubit, BLoC, Dio, WebSocket (STOMP), Hive, SQLite, GetIt"
-      ],
-      [
-        "Backend",
-        "Spring Boot, Spring Security, RESTful APIs, WebSocket (STOMP), JWT, BCrypt, Spring Data JPA, Hibernate, RabbitMQ, Redis"
-      ],
-      [
-        "Frontend",
-        "React, Vite, Tailwind CSS, Recharts"
-      ],
-      [
-        "DevOps & Tools",
-        "MySQL, Docker, Docker Compose, Nginx, GitHub Actions, Cloudinary, Stripe, Postman, Git, GitHub"
-      ],
-      [
-        "Concepts",
-        "OOP, SOLID Principles, Hexagonal Architecture, Clean Architecture, Design Patterns"
+        [
+          "Languages",
+          "Java, Dart, JavaScript, SQL, HTML5, CSS3, C++"
+        ],
+        [
+          "Mobile (Flutter)",
+          "Cross-Platform Development, Clean Architecture, MVVM, Cubit, BLoC, Dio, WebSocket (STOMP), Hive, SQLite, GetIt"
+        ],
+        [
+          "Backend",
+          "Spring Boot, Spring Security, RESTful APIs, WebSocket (STOMP), JWT, BCrypt, Spring Data JPA, Hibernate, RabbitMQ, Redis"
+        ],
+        [
+          "Frontend",
+          "React, Vite, Tailwind CSS, Recharts"
+        ],
+        [
+          "DevOps & Tools",
+          "MySQL, Docker, Docker Compose, Nginx, GitHub Actions, Cloudinary, Stripe, Postman, Git, GitHub"
+        ],
+        [
+          "Concepts",
+          "OOP, SOLID Principles, Hexagonal Architecture, Clean Architecture, Design Patterns"
+        ]
       ]
-    ]
     }
   }
 }
