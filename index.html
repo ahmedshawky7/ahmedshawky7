@@ -100,7 +100,7 @@
 
         .hero .role{
             font-size:clamp(15px,2vw,19px);color:var(--muted);
-            margin-top:16px;min-height:30px;font-weight:500;
+            margin-top:16px;min-height:30px;font-weight:500;max-width:740px;
         }
         .hero .role .cursor{
             display:inline-block;width:2px;height:1.1em;background:var(--cyan);
@@ -234,8 +234,8 @@
             font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;
             margin-bottom:12px;color:#fff;letter-spacing:-.3px;
         }
-        .project-card p{font-size:14px;color:var(--muted);margin-bottom:18px;line-height:1.75}
-        .project-card .chips{margin-bottom:20px}
+        .project-card p{font-size:14px;color:var(--muted);margin-bottom:18px;line-height:1.75;direction:ltr;text-align:left}
+        .project-card .chips{margin-bottom:20px;direction:ltr}
         .project-card .chips .chip{font-size:11.5px;padding:4px 10px}
 
         .links{display:flex;gap:10px;flex-wrap:wrap}
@@ -452,13 +452,27 @@
 
         /* ============ Helpers ============ */
         const skillLabels = {
-            languages: 'لغات البرمجة',
-            mobile: 'تطبيقات الموبايل',
-            backend: 'الـ Backend',
-            devops_tools: 'أدوات و DevOps',
-            concepts: 'مفاهيم برمجية'
+            'Languages': 'لغات البرمجة',
+            'Mobile (Flutter)': 'تطوير الموبايل (Flutter)',
+            'Backend': 'تطوير الـ Backend',
+            'Frontend': 'تطوير الـ Frontend',
+            'DevOps & Tools': 'أدوات و DevOps',
+            'Concepts': 'المفاهيم والمعمارية'
         };
-        const catLabels = { flutter: 'Flutter', backend: 'Backend', fullstack: 'Full-Stack' };
+        const catLabels = { all: 'الكل', fullstack: 'Full-Stack', backend: 'Backend', flutter: 'Flutter' };
+
+        const knownTechs = [
+            'Spring Boot', 'Flutter', 'React', 'Tailwind CSS', 'Hexagonal Architecture',
+            'Clean Architecture', 'WebSocket', 'STOMP', 'JWT', 'Spring Security',
+            'MySQL', 'Docker', 'Nginx', 'Hibernate', 'Cubit', 'BLoC',
+            'Firebase', 'Cloud Firestore', 'Hive', 'SQLite', 'Redis',
+            'RabbitMQ', 'Stripe', 'Cloudinary', 'GitHub Actions', 'REST APIs'
+        ];
+
+        function extractTechs(bullets) {
+            const text = (bullets || []).join(' ').toLowerCase();
+            return knownTechs.filter(t => text.includes(t.toLowerCase())).slice(0, 6);
+        }
 
         function isValidUrl(u) {
             if (!u) return false;
@@ -471,6 +485,24 @@
             } catch { return false; }
         }
 
+        function normalizeProject(p, category) {
+            const links = Array.isArray(p.links) ? p.links : [];
+            const gitLink = links.find(l => (l.label || '').toLowerCase().includes('git'));
+            const liveLink = links.find(l => {
+                const lbl = (l.label || '').toLowerCase();
+                return lbl.includes('live') || lbl.includes('demo');
+            });
+
+            return {
+                category,
+                title: (p.name || '').replace(/--/g, '—'),
+                description: (p.bullets || []).join(' '),
+                technologies: extractTechs(p.bullets),
+                github_url: gitLink?.url || p.url || '',
+                live_url: liveLink?.url || ''
+            };
+        }
+
         /* ============ Typing ============ */
         function typeTitle(text) {
             const el = document.getElementById('typed');
@@ -479,7 +511,7 @@
                 if (i <= text.length) {
                     el.textContent = text.slice(0, i);
                     i++;
-                    setTimeout(step, 45);
+                    setTimeout(step, 40);
                 }
             })();
         }
@@ -501,7 +533,7 @@
         };
 
         /* ============ Render Functions ============ */
-        let allProjects = [];
+        let projectsByCat = {};
 
         function renderFilters(cats) {
             const box = document.getElementById('filters');
@@ -509,12 +541,11 @@
             cats.forEach(c => {
                 const b = document.createElement('button');
                 b.className = 'filter-btn' + (c === 'all' ? ' active' : '');
-                b.textContent = c === 'all' ? 'الكل' : (catLabels[c] || c);
+                b.textContent = catLabels[c] || c;
                 b.addEventListener('click', () => {
                     box.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
                     b.classList.add('active');
-                    const filtered = c === 'all' ? allProjects : allProjects.filter(p => p.category === c);
-                    renderProjects(filtered);
+                    renderProjects(projectsByCat[c] || []);
                 });
                 box.appendChild(b);
             });
@@ -574,45 +605,71 @@
         fetch('data/data.json')
             .then(r => { if (!r.ok) throw new Error('data.json not found'); return r.json(); })
             .then(data => {
-                // Hero
-                document.getElementById('dev-name').textContent = data.name || 'Portfolio';
-                document.title = `${data.name || 'Portfolio'} — Portfolio`;
-                document.getElementById('footer-name').textContent = data.name || 'Portfolio';
+                const personal = data.personal || {};
+                const profiles = data.profiles || {};
+                const fullstack = profiles.fullstack || {};
 
-                const initials = (data.name || 'A S')
+                // Hero
+                const devName = personal.name || 'Ahmed Shawky';
+                document.getElementById('dev-name').textContent = devName;
+                document.title = `${devName} — Portfolio`;
+                document.getElementById('footer-name').textContent = devName;
+
+                const initials = devName
                     .split(' ')
+                    .filter(Boolean)
                     .map(w => w[0])
                     .slice(0, 2)
                     .join('')
                     .toUpperCase();
-                document.getElementById('avatar').textContent = initials;
+                document.getElementById('avatar').textContent = initials || 'AS';
 
-                typeTitle(data.title || '');
+                typeTitle('Software Engineer • Java Spring Boot & Flutter');
 
-                // Skills
+                // Skills (من profiles.fullstack.skills)
                 const sg = document.getElementById('skills-grid');
-                Object.entries(data.skills || {}).forEach(([key, arr]) => {
-                    if (!Array.isArray(arr) || !arr.length) return;
+                sg.innerHTML = '';
+                (fullstack.skills || []).forEach(([catName, itemsStr]) => {
+                    const arr = String(itemsStr || '').split(',').map(s => s.trim()).filter(Boolean);
+                    if (!arr.length) return;
                     const div = document.createElement('div');
                     div.className = 'skill-card';
                     div.innerHTML = `
-                        <h3>${skillLabels[key] || key}</h3>
+                        <h3>${skillLabels[catName] || catName}</h3>
                         <div class="chips">${arr.map(s => `<span class="chip">${s}</span>`).join('')}</div>
                     `;
                     sg.appendChild(div);
                 });
 
-                // Projects
-                allProjects = (data.projects || []).map(p => ({
-                    ...p,
-                    category: p.category || 'other'
-                }));
-                const cats = ['all', ...new Set(allProjects.map(p => p.category))];
-                renderFilters(cats);
-                renderProjects(allProjects);
+                // Projects (تجميع من fullstack و backend و flutter بدون تكرار في تبويب "الكل")
+                const fullstackList = (profiles.fullstack?.projects || []).map(p => normalizeProject(p, 'fullstack'));
+                const backendList   = (profiles.backend?.projects || []).map(p => normalizeProject(p, 'backend'));
+                const flutterList   = (profiles.flutter?.projects || []).map(p => normalizeProject(p, 'flutter'));
 
-                // Contact
-                renderContact(data.contact || {});
+                const seenUrls = new Set();
+                const allUnique = [];
+                [...fullstackList, ...backendList, ...flutterList].forEach(p => {
+                    const key = (p.github_url || p.title).toLowerCase().trim();
+                    if (!seenUrls.has(key)) {
+                        seenUrls.add(key);
+                        allUnique.push(p);
+                    }
+                });
+
+                projectsByCat = {
+                    all: allUnique,
+                    fullstack: fullstackList,
+                    backend: backendList,
+                    flutter: flutterList
+                };
+
+                const availableCats = ['all', 'fullstack', 'backend', 'flutter']
+                    .filter(c => (projectsByCat[c] || []).length > 0);
+                renderFilters(availableCats);
+                renderProjects(projectsByCat.all);
+
+                // Contact (من personal)
+                renderContact(personal);
 
                 // Reveals
                 observeReveals();
@@ -620,7 +677,7 @@
             .catch(err => {
                 console.error(err);
                 document.getElementById('dev-name').textContent = 'تعذر تحميل البيانات';
-                document.querySelector('.role').innerHTML = '<span style="color:#f472b6">تأكد إن data.json في نفس الفولدر</span>';
+                document.querySelector('.role').innerHTML = '<span style="color:#f472b6">تأكد من وجود ملف data/data.json بصيغة JSON صحيحة</span>';
             });
     </script>
 </body>
