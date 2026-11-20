@@ -35,6 +35,20 @@
       "experience_title": "Cross-Platform Mobile Development Track",
       "projects": [
         {
+          "name": "Clinic & Medical Center SaaS Platform -- Patient Mobile App",
+          "url": "https://github.com/ahmedshawky7/clinic-platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/clinic-platform"
+            }
+          ],
+          "bullets": [
+            "Built the Flutter patient mobile app for a multi-tenant SaaS medical platform supporting clinic/branch discovery, visit-type booking (examination vs. consultation), and QR code e-tickets.",
+            "Integrated STOMP WebSockets for real-time queue updates, live wait-time estimation, self-cancellation, skipped/no-show handling, prescription history, and RTL Arabic UI."
+          ]
+        },
+        {
           "name": "Noor Quran -- Islamic Mobile App",
           "url": "https://github.com/ahmedshawky7/noor_quran",
           "links": [
@@ -110,7 +124,7 @@
         ],
         [
           "Backend Integration",
-          "REST APIs, Dio, Firebase Authentication, Cloud Firestore, Firebase Storage"
+          "REST APIs, WebSocket (STOMP), Dio, Firebase Authentication, Cloud Firestore, Firebase Storage"
         ],
         [
           "Local Storage",
@@ -126,6 +140,20 @@
       "summary": "Junior Java Backend Developer with hands-on experience building RESTful APIs using Java and Spring Boot. Skilled in Spring Security, JWT authentication, role-based access control, Spring Data JPA, Hibernate, and MySQL, with a focus on clean and maintainable backend architecture.",
       "experience_title": "Mobile Development Track",
       "projects": [
+        {
+          "name": "Clinic & Medical Center SaaS Platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/clinic-platform"
+            }
+          ],
+          "bullets": [
+            "Architected a multi-tenant SaaS clinic management backend using Spring Boot 3 and Hexagonal Architecture (Ports & Adapters) across modular Maven layers (domain, application, infrastructure, boot).",
+            "Implemented real-time STOMP WebSocket queues, pessimistic locking for concurrent ticket calls, priority emergency walk-ins, timezone-aware clinic scheduling, and visit-type revenue analytics.",
+            "Secured with Spring Security, JWT with immediate session revocation for suspended staff/tenants, hierarchical password resets, per-clinic patient blocking, and Docker/Nginx deployment."
+          ]
+        },
         {
           "name": "E-Commerce Platform",
           "links": [
@@ -179,7 +207,7 @@
         ],
         [
           "Backend",
-          "Spring Boot, Spring MVC, REST APIs, WebSocket"
+          "Spring Boot, Spring MVC, REST APIs, WebSocket (STOMP)"
         ],
         [
           "Security",
@@ -195,7 +223,7 @@
         ],
         [
           "Testing",
-          "JUnit, Mockito, Spring Security Test, Postman"
+          "JUnit, AssertJ, Mockito, Spring Security Test, Postman"
         ],
         [
           "Build & Tools",
@@ -203,11 +231,11 @@
         ],
         [
           "DevOps",
-          "Docker, Docker Compose, GitHub Actions, CI/CD"
+          "Docker, Docker Compose, Nginx, GitHub Actions, CI/CD"
         ],
         [
           "Architecture & Principles",
-          "OOP, SOLID, Clean Architecture, Design Principles"
+          "OOP, SOLID, Hexagonal Architecture, Clean Architecture, Design Principles"
         ]
       ]
     },
@@ -215,6 +243,19 @@
       "summary": "Software Engineer focused on Full-Stack Development with Flutter and Java Spring Boot. Experienced in building cross-platform mobile applications and secure backend REST APIs using Clean Architecture, Cubit/BLoC, Spring Security, and JWT.",
       "experience_title": "Cross-Platform Mobile Development Track",
       "projects": [
+        {
+          "name": "Clinic & Medical Center SaaS Platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/clinic-platform"
+            }
+          ],
+          "bullets": [
+            "Engineered a multi-tenant SaaS platform combining a Spring Boot (Hexagonal Architecture) backend, a React + Tailwind CSS operational dashboard with single/multi-doctor TV waiting room screens, and a Flutter patient app.",
+            "Implemented real-time STOMP WebSocket queues, priority emergency walk-ins, visit-type pricing and revenue analytics, QR e-tickets, immediate JWT revocation, and Docker + Nginx orchestration."
+          ]
+        },
         {
           "name": "E-Commerce Platform",
           "links": [
@@ -284,27 +325,31 @@
         }
       ],
       "skills": [
-        [
-          "Languages",
-          "Java, Dart, SQL, C++"
-        ],
-        [
-          "Mobile (Flutter)",
-          "Cross-Platform Development, Clean Architecture, MVVM, Cubit, BLoC, Dio, Hive, SQLite, GetIt"
-        ],
-        [
-          "Backend",
-          "Spring Boot, Spring Security, RESTful APIs, WebSocket, JWT, BCrypt, Spring Data JPA, Hibernate, RabbitMQ, Redis"
-        ],
-        [
-          "DevOps & Tools",
-          "MySQL, Docker, Docker Compose, GitHub Actions, Cloudinary, Stripe, Postman, Git, GitHub"
-        ],
-        [
-          "Concepts",
-          "OOP, SOLID Principles, Clean Architecture, Design Patterns"
-        ]
+      [
+        "Languages",
+        "Java, Dart, JavaScript, SQL, HTML5, CSS3, C++"
+      ],
+      [
+        "Mobile (Flutter)",
+        "Cross-Platform Development, Clean Architecture, MVVM, Cubit, BLoC, Dio, WebSocket (STOMP), Hive, SQLite, GetIt"
+      ],
+      [
+        "Backend",
+        "Spring Boot, Spring Security, RESTful APIs, WebSocket (STOMP), JWT, BCrypt, Spring Data JPA, Hibernate, RabbitMQ, Redis"
+      ],
+      [
+        "Frontend",
+        "React, Vite, Tailwind CSS, Recharts"
+      ],
+      [
+        "DevOps & Tools",
+        "MySQL, Docker, Docker Compose, Nginx, GitHub Actions, Cloudinary, Stripe, Postman, Git, GitHub"
+      ],
+      [
+        "Concepts",
+        "OOP, SOLID Principles, Hexagonal Architecture, Clean Architecture, Design Patterns"
       ]
+    ]
     }
   }
 }
