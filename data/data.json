@@ -77,20 +77,6 @@
           ]
         },
         {
-          "name": "E-Commerce App",
-          "url": "https://github.com/ahmedshawky7/ecommerce_app",
-          "links": [
-            {
-              "label": "GitHub",
-              "url": "https://github.com/ahmedshawky7/ecommerce_app"
-            }
-          ],
-          "bullets": [
-            "Built a Flutter e-commerce application with product browsing and shopping workflows.",
-            "Integrated REST APIs and structured the application using reusable components and state management."
-          ]
-        },
-        {
           "name": "Tech News App",
           "url": "https://github.com/ahmedshawky7/news_app",
           "links": [
@@ -137,7 +123,7 @@
       ]
     },
     "backend": {
-      "summary": "Junior Java Backend Developer with hands-on experience building RESTful APIs using Java and Spring Boot. Skilled in Spring Security, JWT authentication, role-based access control, Spring Data JPA, Hibernate, and MySQL, with a focus on clean and maintainable backend architecture.",
+      "summary": "Junior Java Backend Developer with hands-on experience building RESTful APIs using Java and Spring Boot. Skilled in Spring Security, JWT authentication, role-based access control, Spring Data JPA, Hibernate, Redis, RabbitMQ, and MySQL, with a focus on clean and maintainable backend architecture.",
       "experience_title": "Mobile Development Track",
       "projects": [
         {
@@ -155,7 +141,7 @@
           ]
         },
         {
-          "name": "E-Commerce Platform",
+          "name": "NovaCart — Enterprise E-Commerce Platform",
           "links": [
             {
               "label": "GitHub",
@@ -163,9 +149,9 @@
             }
           ],
           "bullets": [
-            "Developed a full-stack e-commerce platform with Spring Boot REST APIs, customer storefront, and admin dashboard.",
-            "Implemented JWT refresh tokens, role-based access control, product management, cart, checkout, orders, and sales analytics.",
-            "Integrated Stripe payments, Redis caching, RabbitMQ messaging, MySQL, Cloudinary, Swagger/OpenAPI, and Docker."
+            "Engineered a full-stack e-commerce platform using Spring Boot 4 (Java 17) and React 18 (TypeScript, Tailwind CSS) featuring bilingual AR (RTL) / EN (LTR) localization, balanced Light/Dark themes, and indicative multi-currency display.",
+            "Built advanced commerce workflows including SKU-level Product Variants, Promo Codes, Verified-Buyer Reviews, real-time STOMP WebSocket order tracking and admin alerts, and an immutable financial Audit Log.",
+            "Ensured transactional concurrency and stock integrity via Pessimistic/Optimistic Locking and Idempotency-Key deduplication, integrating Stripe Webhooks, Redis caching, RabbitMQ, Cloudinary, 27 automated unit/integration tests, and Docker/Nginx deployment."
           ]
         },
         {
@@ -199,11 +185,11 @@
       "skills": [
         [
           "Languages",
-          "Java, SQL, Dart"
+          "Java, SQL, TypeScript, Dart"
         ],
         [
           "Backend",
-          "Spring Boot, Spring MVC, REST APIs, WebSocket (STOMP)"
+          "Spring Boot, Spring MVC, REST APIs, WebSocket (STOMP), Redis, RabbitMQ"
         ],
         [
           "Security",
@@ -219,7 +205,7 @@
         ],
         [
           "Testing",
-          "JUnit, AssertJ, Mockito, Spring Security Test, Postman"
+          "JUnit 5, AssertJ, Mockito, MockMvc, Spring Security Test, H2, Postman"
         ],
         [
           "Build & Tools",
@@ -236,7 +222,7 @@
       ]
     },
     "fullstack": {
-      "summary": "Software Engineer focused on Full-Stack Development with Flutter and Java Spring Boot. Experienced in building cross-platform mobile applications and secure backend REST APIs using Clean Architecture, Cubit/BLoC, Spring Security, and JWT.",
+      "summary": "Software Engineer focused on Full-Stack Development with React (TypeScript), Java Spring Boot, and Flutter. Experienced in building responsive web applications, cross-platform mobile apps, and secure backend REST APIs using Clean Architecture, Spring Security, JWT, and WebSockets.",
       "experience_title": "Cross-Platform Mobile Development Track",
       "projects": [
         {
@@ -253,7 +239,7 @@
           ]
         },
         {
-          "name": "E-Commerce Platform",
+          "name": "NovaCart — Enterprise E-Commerce Platform",
           "links": [
             {
               "label": "GitHub",
@@ -261,8 +247,9 @@
             }
           ],
           "bullets": [
-            "Built a full-stack platform using Spring Boot REST APIs with JWT authentication, refresh tokens, and role-based access control.",
-            "Integrated Stripe payments, Redis caching, RabbitMQ, Cloudinary, MySQL, and Docker."
+            "Engineered a full-stack e-commerce platform using Spring Boot 4 (Java 17) and React 18 (TypeScript, Tailwind CSS) featuring bilingual AR (RTL) / EN (LTR) localization, balanced Light/Dark themes, and indicative multi-currency display.",
+            "Built advanced commerce workflows including SKU-level Product Variants, Promo Codes, Verified-Buyer Reviews, real-time STOMP WebSocket order tracking and admin alerts, and an immutable financial Audit Log.",
+            "Ensured transactional concurrency and stock integrity via Pessimistic/Optimistic Locking and Idempotency-Key deduplication, integrating Stripe Webhooks, Redis caching, RabbitMQ, Cloudinary, 27 automated unit/integration tests, and Docker/Nginx deployment."
           ]
         },
         {
@@ -319,7 +306,7 @@
       "skills": [
         [
           "Languages",
-          "Java, Dart, JavaScript, SQL, HTML5, CSS3, C++"
+          "Java, TypeScript, JavaScript, Dart, SQL, HTML5, CSS3, C++"
         ],
         [
           "Mobile (Flutter)",
@@ -331,11 +318,11 @@
         ],
         [
           "Frontend",
-          "React, Vite, Tailwind CSS, Recharts"
+          "React, TypeScript, Vite, Tailwind CSS, TanStack Query, Recharts, WebSockets (STOMP)"
         ],
         [
           "DevOps & Tools",
-          "MySQL, Docker, Docker Compose, Nginx, GitHub Actions, Cloudinary, Stripe, Postman, Git, GitHub"
+          "MySQL, Docker, Docker Compose, Nginx, GitHub Actions, Cloudinary, Stripe, JUnit 5, Mockito, MockMvc, Postman, Git, GitHub"
         ],
         [
           "Concepts",
