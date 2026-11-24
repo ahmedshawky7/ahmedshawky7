@@ -35,6 +35,20 @@
       "experience_title": "Cross-Platform Mobile Development Track",
       "projects": [
         {
+          "name": "Shifra — Multi-Tenant Restaurant POS, KDS & QR Menu Platform (Waiter Mobile App)",
+          "url": "https://github.com/ahmedshawky7/shifra-restaurant-platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/shifra-restaurant-platform"
+            }
+          ],
+          "bullets": [
+            "Built the Flutter waiter mobile app (waiter_app) for a multi-tenant restaurant SaaS platform, enabling live branch table tracking, multi-branch switching, and pre-prep table order creation and modification.",
+            "Integrated STOMP WebSockets for real-time dish-ready and table call notifications alongside SharedPreferences local caching, Idempotency-Key duplicate protection, variants/addons customization, kitchen notes, and RTL Arabic UI."
+          ]
+        },
+        {
           "name": "Clinic & Medical Center SaaS Platform -- Patient Mobile App",
           "url": "https://github.com/ahmedshawky7/clinic-platform",
           "links": [
@@ -127,6 +141,20 @@
       "experience_title": "Mobile Development Track",
       "projects": [
         {
+          "name": "Shifra — Multi-Tenant Restaurant POS, KDS & QR Menu Platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/shifra-restaurant-platform"
+            }
+          ],
+          "bullets": [
+            "Architected a multi-tenant, multi-branch restaurant SaaS platform using Spring Boot (Java 17) and Multi-Module Clean/Hexagonal Architecture (domain, application, infrastructure, boot) with MySQL, strict tenant/branch isolation, and JWT RBAC (Super Admin, Owner, Cashier, Chef, Waiter).",
+            "Engineered real-time STOMP WebSocket workflows powering a React Cashier POS with live table status mapping, an audio-alert Kitchen Display System (KDS), a Pickup TV screen, and a dynamic QR digital menu supporting Variants, Addons, and automated branch working-hours/tax rules.",
+            "Delivered a synchronized Flutter waiter mobile app (waiter_app) for table management, order customization, and kitchen notes, hardened with concurrency locking, Idempotency-Key deduplication, an immutable financial Audit Log, automated Data Seeding, and Docker Compose deployment."
+          ]
+        },
+        {
           "name": "Clinic & Medical Center SaaS Platform",
           "links": [
             {
@@ -217,7 +245,7 @@
         ],
         [
           "Architecture & Principles",
-          "OOP, SOLID, Hexagonal Architecture, Clean Architecture, Design Principles"
+          "OOP, SOLID, Hexagonal Architecture, Clean Architecture, Multi-Tenancy, Design Principles"
         ]
       ]
     },
@@ -225,6 +253,20 @@
       "summary": "Software Engineer focused on Full-Stack Development with React (TypeScript), Java Spring Boot, and Flutter. Experienced in building responsive web applications, cross-platform mobile apps, and secure backend REST APIs using Clean Architecture, Spring Security, JWT, and WebSockets.",
       "experience_title": "Cross-Platform Mobile Development Track",
       "projects": [
+        {
+          "name": "Shifra — Multi-Tenant Restaurant POS, KDS & QR Menu Platform",
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/ahmedshawky7/shifra-restaurant-platform"
+            }
+          ],
+          "bullets": [
+            "Architected a multi-tenant, multi-branch restaurant SaaS platform using Spring Boot (Java 17) and Multi-Module Clean/Hexagonal Architecture (domain, application, infrastructure, boot) with MySQL, strict tenant/branch isolation, and JWT RBAC (Super Admin, Owner, Cashier, Chef, Waiter).",
+            "Built a full React web portal encompassing Cashier POS with live table status mapping, an audio-alert Kitchen Display System (KDS), a Pickup TV display, and a QR digital menu supporting Variants, Addons, and automated branch working hours and tax/service rules.",
+            "Developed a real-time Flutter waiter mobile app (waiter_app) for table management, order customization, and kitchen notes, complete with automated Data Seeding, immutable Audit Logging, Base64 TLV tax QR receipts, and Docker Compose deployment."
+          ]
+        },
         {
           "name": "Clinic & Medical Center SaaS Platform",
           "links": [
@@ -310,7 +352,7 @@
         ],
         [
           "Mobile (Flutter)",
-          "Cross-Platform Development, Clean Architecture, MVVM, Cubit, BLoC, Dio, WebSocket (STOMP), Hive, SQLite, GetIt"
+          "Flutter, Cross-Platform Development, Clean Architecture, MVVM, Cubit, BLoC, Dio, WebSocket (STOMP), Hive, SQLite, SharedPreferences, GetIt"
         ],
         [
           "Backend",
@@ -326,7 +368,7 @@
         ],
         [
           "Concepts",
-          "OOP, SOLID Principles, Hexagonal Architecture, Clean Architecture, Design Patterns"
+          "OOP, SOLID Principles, Hexagonal Architecture, Clean Architecture, Multi-Tenancy, Design Patterns"
         ]
       ]
     }
